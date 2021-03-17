@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Core.Interfaces
 {
-    internal interface ITeacherRepository : IEntityRepository<Teacher>
+    public interface ITeacherRepository : IEntityRepository
     {
     }
 }

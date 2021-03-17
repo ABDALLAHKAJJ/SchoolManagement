@@ -10,11 +10,10 @@ namespace SchoolManagement.Business
 {
     public class SchoolManagementContext : DbContext
     {
-        private string connectionString = @"Server = DESKTOP-6E0MHSD\APO; Database= SchoolManagement; Trusted_Connection=True;";
+        private string connectionString = @"Server=DESKTOP-6E0MHSD\APO; Database= SchoolManagement; Trusted_Connection=True;";
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public SchoolManagementContext(DbContextOptions<SchoolManagementContext> options) : base(options)
         {
-            optionsBuilder.UseSqlServer(connectionString);
         }
 
         private DbSet<School> Schools { get; set; }

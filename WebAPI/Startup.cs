@@ -8,6 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using SchoolManagement.Business.Concrete;
+using SchoolManagement.Business.Interfaces;
+using SchoolManagement.Core.Models;
 using SchoolManagement.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -37,6 +40,10 @@ namespace WebAPI
             services.AddDbContext<SchoolManagementContext>(
                 option => option.UseSqlServer(
                     Configuration.GetConnectionString("SMDB")));
+
+            services.AddScoped<IEntityBusiness<Student>, EntityBusiness<Student>>();
+            services.AddScoped<IEntityBusiness<Teacher>, EntityBusiness<Teacher>>();
+            services.AddScoped<IEntityBusiness<School>, EntityBusiness<School>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

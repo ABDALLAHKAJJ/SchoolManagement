@@ -16,8 +16,8 @@ namespace SchoolManagement.EntityFramework
         {
         }
 
-        private DbSet<School> Schools { get; set; }
-        private DbSet<Student> Students { get; set; }
-        private DbSet<Teacher> Teachers { get; set; }
+        public DbSet<School> Schools { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
     }
 }

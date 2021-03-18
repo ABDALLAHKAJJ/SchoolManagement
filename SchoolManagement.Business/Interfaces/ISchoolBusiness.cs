@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Business.Interfaces
 {
-    public interface ISchoolBusiness : IEntityRepository<School>
+    public interface ISchoolBusiness<School> : IEntityRepository<School>
+        where School : class, IEntity, new()
     {
     }
 }

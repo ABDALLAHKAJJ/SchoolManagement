@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Business
 {
-    public class SchoolManagementContext : DbContext
+    public class SchoolManagementContext
     {
         private string connectionString = @"Server=DESKTOP-6E0MHSD\APO; Database= SchoolManagement; Trusted_Connection=True;";
 
-        public SchoolManagementContext(DbContextOptions<SchoolManagementContext> options) : base(options)
-        {
-        }
+        //public SchoolManagementContext(DbContextOptions<SchoolManagementContext> options) : base(options)
+        //{
+        //}
 
         private DbSet<School> Schools { get; set; }
         private DbSet<Student> Students { get; set; }

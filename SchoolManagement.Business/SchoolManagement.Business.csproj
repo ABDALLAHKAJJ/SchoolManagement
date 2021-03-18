@@ -14,10 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SchoolManagement.Core\SchoolManagement.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Concrete\" />
+    <ProjectReference Include="..\SchoolManagement.EntityFramework\SchoolManagement.EntityFramework.csproj" />
   </ItemGroup>
 
 </Project>

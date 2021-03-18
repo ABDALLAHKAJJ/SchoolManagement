@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Core.Abstracts
 {
-    internal interface IEntity
+    public interface IEntity
     {
     }
 }

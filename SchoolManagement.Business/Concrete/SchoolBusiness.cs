@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Business.Concrete
 {
-    public class SchoolBusiness : EntityBusiness<School>, ISchoolBusiness<School>
+    public class SchoolBusiness : EntityBusiness<School>, ISchoolBusiness
     {
         private readonly ISchoolRepository _sr;
 

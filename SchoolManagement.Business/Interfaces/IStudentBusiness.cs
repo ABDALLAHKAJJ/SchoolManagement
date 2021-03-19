@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Business.Interfaces
 {
-    public interface IStudentBusiness<Student> : IEntityRepository<Student>
-        where Student : class, IEntity, new()
+    public interface IStudentBusiness : IEntityRepository<Student>
+
     {
     }
 }

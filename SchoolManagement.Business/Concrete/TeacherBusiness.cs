@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Business.Concrete
 {
-    public class TeacherBusiness : EntityBusiness<Teacher>, ITeacherBusiness<Teacher>
+    public class TeacherBusiness : EntityBusiness<Teacher>, ITeacherBusiness
     {
         private readonly TeacherRepository _tr;
 

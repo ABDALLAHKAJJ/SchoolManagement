@@ -41,9 +41,9 @@ namespace WebAPI
                 option => option.UseSqlServer(
                     Configuration.GetConnectionString("SMDB")));
 
-            services.AddScoped<IEntityBusiness<Student>, EntityBusiness<Student>>();
-            services.AddScoped<IEntityBusiness<Teacher>, EntityBusiness<Teacher>>();
-            services.AddScoped<IEntityBusiness<School>, EntityBusiness<School>>();
+            services.AddScoped<ISchoolBusiness, SchoolBusiness>();
+            services.AddScoped<IStudentBusiness, StudentBusiness>();
+            services.AddScoped<ITeacherBusiness, TeacherBusiness>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

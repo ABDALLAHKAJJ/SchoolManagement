@@ -1,12 +1,7 @@
-﻿using SchoolManagement.Core.Interfaces;
-using SchoolManagement.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SchoolManagement.Core.Models;
+using SchoolManagement.EntityFramework.Interfaces;
 
-namespace SchoolManagement.EntityFramework
+namespace SchoolManagement.EntityFramework.Repository
 {
     public class TeacherRepository : EntityRepository<Teacher>, ITeacherRepository
     {

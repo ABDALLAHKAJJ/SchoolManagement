@@ -1,11 +1,7 @@
 ﻿using SchoolManagement.Business.Interfaces;
 using SchoolManagement.Core.Abstracts;
-using SchoolManagement.EntityFramework;
-using System;
+using SchoolManagement.EntityFramework.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolManagement.Business.Concrete
 {

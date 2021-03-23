@@ -1,87 +1,18 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using SchoolManagement.Business.Interfaces;
+using SchoolManagement.Core.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
-    public class TeacherController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class TeacherController : EntityController<Teacher>
     {
-        // GET: TeacherController
-        public ActionResult Index()
-        {
-            return View();
-        }
+        private ITeacherBusiness _teacherBusiness;
 
-        // GET: TeacherController/Details/5
-        public ActionResult Details(int id)
+        public TeacherController(ITeacherBusiness teacherBusiness) : base(teacherBusiness)
         {
-            return View();
-        }
-
-        // GET: TeacherController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: TeacherController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: TeacherController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: TeacherController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: TeacherController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: TeacherController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _teacherBusiness = teacherBusiness;
         }
     }
 }

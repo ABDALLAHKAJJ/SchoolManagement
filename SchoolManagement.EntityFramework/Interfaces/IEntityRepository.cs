@@ -1,10 +1,7 @@
-﻿using System;
+﻿using SchoolManagement.Core.Abstracts;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SchoolManagement.Core.Abstracts
+namespace SchoolManagement.EntityFramework.Interfaces
 {
     public interface IEntityRepository<TEntity>
         where TEntity : class, IEntity, new()

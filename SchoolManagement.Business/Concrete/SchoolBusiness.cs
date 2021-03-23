@@ -1,12 +1,6 @@
 ﻿using SchoolManagement.Business.Interfaces;
-using SchoolManagement.Core.Interfaces;
 using SchoolManagement.Core.Models;
-using SchoolManagement.EntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SchoolManagement.EntityFramework.Interfaces;
 
 namespace SchoolManagement.Business.Concrete
 {

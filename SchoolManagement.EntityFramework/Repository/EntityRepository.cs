@@ -1,11 +1,9 @@
 ﻿using SchoolManagement.Core.Abstracts;
-using System;
+using SchoolManagement.EntityFramework.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SchoolManagement.EntityFramework
+namespace SchoolManagement.EntityFramework.Repository
 {
     public class EntityRepository<TEntity> : IEntityRepository<TEntity>
         where TEntity : class, IEntity, new()
@@ -20,13 +18,19 @@ namespace SchoolManagement.EntityFramework
         public void Add(TEntity entity)
         {
             if (entity != null)
+            {
                 _db.Add(entity);
+                _db.SaveChanges();
+            }
         }
 
         public void Delete(TEntity entity)
         {
             if (entity != null)
+            {
                 _db.Remove(entity);
+                _db.SaveChanges();
+            }
         }
 
         public TEntity Get(int id)
@@ -42,7 +46,10 @@ namespace SchoolManagement.EntityFramework
         public void Update(TEntity entity)
         {
             if (entity != null)
+            {
                 _db.Update(entity);
+                _db.SaveChanges();
+            }
         }
     }
 }

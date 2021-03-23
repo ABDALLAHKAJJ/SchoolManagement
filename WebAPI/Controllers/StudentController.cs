@@ -1,19 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SchoolManagement.Business.Interfaces;
 using SchoolManagement.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
-    public class StudentController : Controller
+    public class StudentController : EntityController<Student>
     {
-        public IActionResult Index()
+        private IStudentBusiness _studentBusiness;
+
+        public StudentController(IStudentBusiness studentBusiness) : base(studentBusiness)
         {
-            return View();
+            _studentBusiness = studentBusiness;
         }
     }
 }

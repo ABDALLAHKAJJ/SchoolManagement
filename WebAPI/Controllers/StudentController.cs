@@ -8,7 +8,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class StudentController : EntityController<Student>
     {
-        private IStudentBusiness _studentBusiness;
+        private readonly IStudentBusiness _studentBusiness;
 
         public StudentController(IStudentBusiness studentBusiness) : base(studentBusiness)
         {

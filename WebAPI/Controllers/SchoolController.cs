@@ -1,6 +1,6 @@
-﻿using SchoolManagement.Business.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc;
+using SchoolManagement.Business.Interfaces;
 using SchoolManagement.Core.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {

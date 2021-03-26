@@ -14,12 +14,13 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.11.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.1" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SchoolManagement.Automation\SchoolManagement.Automation.csproj" />
     <ProjectReference Include="..\SchoolManagement.Business\SchoolManagement.Business.csproj" />
     <ProjectReference Include="..\SchoolManagement.EntityFramework\SchoolManagement.EntityFramework.csproj" />
   </ItemGroup>

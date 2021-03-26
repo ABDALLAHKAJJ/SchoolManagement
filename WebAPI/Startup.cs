@@ -1,4 +1,5 @@
 using Hangfire;
+using Hangfire.Common;
 using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,12 +8,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using SchoolManagement.Automation.HangFire.JobConcrete;
+using SchoolManagement.Automation.HangFire.JobIntrefaces;
 using SchoolManagement.Business.Concrete;
 using SchoolManagement.Business.Interfaces;
 using SchoolManagement.EntityFramework;
 using SchoolManagement.EntityFramework.Interfaces;
 using SchoolManagement.EntityFramework.Repository;
 using System;
+using System.Configuration;
 
 namespace WebAPI
 {
@@ -45,6 +49,8 @@ namespace WebAPI
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<ITeacherRepository, TeacherRepository>();
 
+            services.AddScoped<IJobAllStudentsRetriever, JobAllStudentsRetriever>();
+
             services.AddHangfire(config =>
 
                 config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
@@ -63,7 +69,13 @@ namespace WebAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IBackgroundJobClient backgroundJobs, ISchoolBusiness schoolBusiness)
+        public void Configure(
+            IApplicationBuilder app,
+            IWebHostEnvironment env,
+            IBackgroundJobClient backgroundJobs,
+            ISchoolBusiness schoolBusiness,
+            IRecurringJobManager recurringJobManager,
+            IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -72,8 +84,10 @@ namespace WebAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
             }
             app.UseHangfireDashboard();
-
-            backgroundJobs.Enqueue(() => schoolBusiness.GetAll());
+            recurringJobManager.AddOrUpdate(
+                "AllStudentsRetriever",
+                Job.FromExpression<IJobAllStudentsRetriever>(x => x.AllStudentsRetrieve()),
+                ConfigurationManager.AppSettings["AllStudentsRetriever"]);
 
             app.UseHttpsRedirection();
 

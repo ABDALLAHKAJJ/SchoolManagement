@@ -1,7 +1,7 @@
-﻿using SchoolManagement.Core.Abstracts;
+﻿using SchoolManagement.Libraries.Core.Absrtacts;
 using System.Collections.Generic;
 
-namespace SchoolManagement.Business.Interfaces
+namespace SchoolManagement.Business.Abstracts
 {
     public interface IEntityBusiness<TEntity> where TEntity : class, IEntity, new()
     {

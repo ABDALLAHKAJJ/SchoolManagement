@@ -1,6 +1,6 @@
-﻿using SchoolManagement.Business.Interfaces;
-using SchoolManagement.Core.Abstracts;
-using SchoolManagement.EntityFramework.Interfaces;
+﻿using SchoolManagement.Business.Abstracts;
+using SchoolManagement.Data.Abstracts;
+using SchoolManagement.Libraries.Core.Absrtacts;
 using System.Collections.Generic;
 
 namespace SchoolManagement.Business.Concrete

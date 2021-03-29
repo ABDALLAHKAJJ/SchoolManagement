@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SchoolManagement.Business.Interfaces;
-using SchoolManagement.Core.Abstracts;
+using SchoolManagement.Business.Abstracts;
+using SchoolManagement.Libraries.Core.Absrtacts;
 
 namespace WebAPI.Controllers
 {

@@ -1,7 +1,7 @@
-﻿using SchoolManagement.Core.Abstracts;
+﻿using SchoolManagement.Libraries.Core.Absrtacts;
 using System.Collections.Generic;
 
-namespace SchoolManagement.EntityFramework.Interfaces
+namespace SchoolManagement.Data.Abstracts
 {
     public interface IEntityRepository<TEntity>
         where TEntity : class, IEntity, new()

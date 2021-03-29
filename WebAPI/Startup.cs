@@ -8,13 +8,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using SchoolManagement.Automation.HangFire.JobAbstracts;
 using SchoolManagement.Automation.HangFire.JobConcrete;
-using SchoolManagement.Automation.HangFire.JobIntrefaces;
+using SchoolManagement.Business.Abstracts;
 using SchoolManagement.Business.Concrete;
-using SchoolManagement.Business.Interfaces;
-using SchoolManagement.EntityFramework;
-using SchoolManagement.EntityFramework.Interfaces;
-using SchoolManagement.EntityFramework.Repository;
+using SchoolManagement.Data;
+using SchoolManagement.Data.Abstracts;
+using SchoolManagement.Data.Repository;
 using System;
 using System.Configuration;
 

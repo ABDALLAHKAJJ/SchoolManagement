@@ -1,9 +1,9 @@
-﻿using SchoolManagement.Core.Abstracts;
-using SchoolManagement.EntityFramework.Interfaces;
+﻿using SchoolManagement.Data.Abstracts;
+using SchoolManagement.Libraries.Core.Absrtacts;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SchoolManagement.EntityFramework.Repository
+namespace SchoolManagement.Data.Repository
 {
     public class EntityRepository<TEntity> : IEntityRepository<TEntity>
         where TEntity : class, IEntity, new()

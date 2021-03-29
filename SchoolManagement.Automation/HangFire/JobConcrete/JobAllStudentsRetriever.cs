@@ -1,6 +1,6 @@
-﻿using SchoolManagement.Automation.HangFire.JobIntrefaces;
-using SchoolManagement.Business.Interfaces;
-using SchoolManagement.Core.Models;
+﻿using SchoolManagement.Automation.HangFire.JobAbstracts;
+using SchoolManagement.Business.Abstracts;
+using SchoolManagement.Data.Entities;
 using System.Collections.Generic;
 
 namespace SchoolManagement.Automation.HangFire.JobConcrete

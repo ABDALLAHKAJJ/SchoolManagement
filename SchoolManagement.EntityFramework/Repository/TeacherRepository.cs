@@ -1,7 +1,7 @@
-﻿using SchoolManagement.Core.Models;
-using SchoolManagement.EntityFramework.Interfaces;
+﻿using SchoolManagement.Data.Abstracts;
+using SchoolManagement.Data.Entities;
 
-namespace SchoolManagement.EntityFramework.Repository
+namespace SchoolManagement.Data.Repository
 {
     public class TeacherRepository : EntityRepository<Teacher>, ITeacherRepository
     {

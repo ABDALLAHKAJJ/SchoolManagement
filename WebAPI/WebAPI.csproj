@@ -30,6 +30,6 @@
   <ItemGroup>
     <ProjectReference Include="..\SchoolManagement.Automation\SchoolManagement.Automation.csproj" />
     <ProjectReference Include="..\SchoolManagement.Business\SchoolManagement.Business.csproj" />
-    <ProjectReference Include="..\SchoolManagement.EntityFramework\SchoolManagement.EntityFramework.csproj" />
+    <ProjectReference Include="..\SchoolManagement.EntityFramework\SchoolManagement.Data.csproj" />
   </ItemGroup>
 </Project>

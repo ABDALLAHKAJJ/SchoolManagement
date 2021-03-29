@@ -1,6 +1,6 @@
-﻿using SchoolManagement.Core.Abstracts;
+﻿using SchoolManagement.Libraries.Core.Absrtacts;
 
-namespace SchoolManagement.Core.Models
+namespace SchoolManagement.Libraries.Core.Models
 {
     public class Entity : IEntity
     {

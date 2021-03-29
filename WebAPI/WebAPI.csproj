@@ -4,7 +4,15 @@
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>476c5926-20e5-408c-a5f7-c48d529696e3</UserSecretsId>
   </PropertyGroup>
-
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="App.Dev.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
+    <None Include="App.Test.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Hangfire.AspNetCore" Version="1.7.20" />
     <PackageReference Include="Hangfire.SqlServer" Version="1.7.20" />

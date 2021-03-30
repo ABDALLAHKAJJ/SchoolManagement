@@ -16,7 +16,6 @@ using SchoolManagement.Data;
 using SchoolManagement.Data.Abstracts;
 using SchoolManagement.Data.Repository;
 using System;
-using System.Configuration;
 
 namespace WebAPI
 {
@@ -72,10 +71,7 @@ namespace WebAPI
         public void Configure(
             IApplicationBuilder app,
             IWebHostEnvironment env,
-            IBackgroundJobClient backgroundJobs,
-            ISchoolBusiness schoolBusiness,
-            IRecurringJobManager recurringJobManager,
-            IServiceProvider serviceProvider)
+            IRecurringJobManager recurringJobManager)
         {
             if (env.IsDevelopment())
             {
@@ -83,23 +79,36 @@ namespace WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
             }
-            app.UseHangfireDashboard();
-            recurringJobManager.AddOrUpdate(
-                "AllStudentsRetriever",
-                Job.FromExpression<IJobAllStudentsRetriever>(x => x.AllStudentsRetrieve()),
-                ConfigurationManager.AppSettings["AllStudentsRetriever"]);
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthorization();
+            InitHangfire(app, recurringJobManager);
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHangfireDashboard();
             });
+        }
+
+        private void InitHangfire(IApplicationBuilder app, IRecurringJobManager recurringJobManager)
+        {
+            app.UseHangfireDashboard();
+            app.UseHangfireDashboard();
+
+            recurringJobManager.AddOrUpdate(
+                "AllStudentsRetriever",
+                Job.FromExpression<IJobAllStudentsRetriever>(x => x.AllStudentsRetrieve()),
+                Configuration.GetValue<string>("AllStudentsRetriever")
+                );
+
+            //bu app.config'tan cekiyor
+            //recurringJobManager.AddOrUpdate(
+            //    "AllStudentsRetriever",
+            //    Job.FromExpression<IJobAllStudentsRetriever>(x => x.AllStudentsRetrieve()),
+            //    ConfigurationManager.AppSettings["AllStudentsRetriever"]);
         }
     }
 }

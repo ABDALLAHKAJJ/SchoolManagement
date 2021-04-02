@@ -1,6 +1,6 @@
 using Hangfire;
 using Hangfire.Common;
-using Hangfire.SqlServer;
+using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +15,7 @@ using SchoolManagement.Business.Concrete;
 using SchoolManagement.Data;
 using SchoolManagement.Data.Abstracts;
 using SchoolManagement.Data.Repository;
-using System;
+using System.Configuration;
 
 namespace WebAPI
 {
@@ -28,6 +28,29 @@ namespace WebAPI
 
         public IConfiguration Configuration { get; }
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IRecurringJobManager recurringJobManager)
+        {
+            if (env.IsDevelopment() || env.IsProduction())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
+            }
+
+            //app.UseHttpsRedirection();
+            app.UseRouting();
+            app.UseAuthorization();
+            app.UseAuthentication();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapSwagger();
+                endpoints.MapControllers();
+            });
+            InitHangfire(app, recurringJobManager);
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -37,8 +60,7 @@ namespace WebAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
             });
             services.AddMvc();
-            services.AddDbContext<SchoolManagementContext>(
-                option => option.UseSqlServer(Configuration.GetConnectionString("SMDB")));
+            services.AddDbContext<SchoolManagementContext>(option => option.UseSqlServer(Configuration.GetConnectionString("SMDB")));
 
             services.AddScoped<ISchoolBusiness, SchoolBusiness>();
             services.AddScoped<IStudentBusiness, StudentBusiness>();
@@ -50,65 +72,49 @@ namespace WebAPI
 
             services.AddScoped<IJobAllStudentsRetriever, JobAllStudentsRetriever>();
 
-            services.AddHangfire(config =>
+            services.AddHangfire(config => { config.UseMemoryStorage(); });
+            //services.AddHangfire(config =>
 
-                config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
-                .UseSimpleAssemblyNameTypeSerializer()
-                .UseRecommendedSerializerSettings()
-                .UseSqlServerStorage(Configuration.GetConnectionString("HangfireConnection"),
-                new SqlServerStorageOptions
-                {
-                    CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
-                    SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-                    QueuePollInterval = TimeSpan.Zero,
-                    UseRecommendedIsolationLevel = true,
-                    DisableGlobalLocks = true
-                }));
+            //    config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+            //    .UseSimpleAssemblyNameTypeSerializer()
+            //    .UseRecommendedSerializerSettings()
+            //    .UseSqlServerStorage(Configuration.GetConnectionString("HangfireConnection"),
+            //    new SqlServerStorageOptions
+            //    {
+            //        CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+            //        SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+            //        QueuePollInterval = TimeSpan.Zero,
+            //        UseRecommendedIsolationLevel = true,
+            //        DisableGlobalLocks = true
+            //    }));
             services.AddHangfireServer();
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(
-            IApplicationBuilder app,
-            IWebHostEnvironment env,
-            IRecurringJobManager recurringJobManager)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-            InitHangfire(app, recurringJobManager);
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
         }
 
         private void InitHangfire(IApplicationBuilder app, IRecurringJobManager recurringJobManager)
         {
-            app.UseHangfireDashboard();
+            app.UseHangfireServer();
             app.UseHangfireDashboard();
 
-            recurringJobManager.AddOrUpdate(
-                "AllStudentsRetriever",
-                Job.FromExpression<IJobAllStudentsRetriever>(x => x.AllStudentsRetrieve()),
-                Configuration.GetValue<string>("AllStudentsRetriever")
-                );
+            bool activateHangfireJobs = bool.Parse(ConfigurationManager.AppSettings["IsHangfireJobsActive"]);
 
-            //bu app.config'tan cekiyor
-            //recurringJobManager.AddOrUpdate(
-            //    "AllStudentsRetriever",
-            //    Job.FromExpression<IJobAllStudentsRetriever>(x => x.AllStudentsRetrieve()),
-            //    ConfigurationManager.AppSettings["AllStudentsRetriever"]);
+            if (activateHangfireJobs)
+            {
+                recurringJobManager.AddOrUpdate(
+                    "AllStudentsRetriever",
+                    Job.FromExpression<IJobAllStudentsRetriever>(x => x.AllStudentsRetrieve()),
+                    Configuration.GetValue<string>("AllStudentsRetriever")
+                    );
+
+                //bu app.config'tan cekiyor
+                //recurringJobManager.AddOrUpdate(
+                //    "AllStudentsRetriever",
+                //    Job.FromExpression<IJobAllStudentsRetriever>(x => x.AllStudentsRetrieve()),
+                //    ConfigurationManager.AppSettings["AllStudentsRetriever"]);
+            }
+            else
+            {
+                recurringJobManager.RemoveIfExists("AllStudentsRetriever");
+            }
         }
     }
 }

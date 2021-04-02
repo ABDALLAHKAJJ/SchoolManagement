@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Configurations>Debug;Release;test</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,5 +17,4 @@
     <ProjectReference Include="..\SchoolManagement.Core\SchoolManagement.Libraries.Core.csproj" />
     <ProjectReference Include="..\SchoolManagement.EntityFramework\SchoolManagement.Data.csproj" />
   </ItemGroup>
-
 </Project>

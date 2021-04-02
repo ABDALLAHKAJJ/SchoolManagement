@@ -3,9 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>476c5926-20e5-408c-a5f7-c48d529696e3</UserSecretsId>
+    <Configurations>Debug;Release;test</Configurations>
   </PropertyGroup>
+
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="App.Dev.config">
       <DependentUpon>App.config</DependentUpon>
     </None>
@@ -13,14 +17,18 @@
       <DependentUpon>App.config</DependentUpon>
     </None>
   </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Hangfire.AspNetCore" Version="1.7.20" />
+    <PackageReference Include="Hangfire.MemoryStorage" Version="1.7.0" />
     <PackageReference Include="Hangfire.SqlServer" Version="1.7.20" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.WindowsServices" Version="5.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="5.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.12.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.1" />

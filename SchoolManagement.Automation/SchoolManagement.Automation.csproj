@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Configurations>Debug;Release;test</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SchoolManagement.Business\SchoolManagement.Business.csproj" />
   </ItemGroup>
-
 </Project>

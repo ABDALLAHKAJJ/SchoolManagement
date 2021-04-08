@@ -14,6 +14,7 @@ using SchoolManagement.Business.Abstracts;
 using SchoolManagement.Business.Concrete;
 using SchoolManagement.Data;
 using SchoolManagement.Data.Abstracts;
+using SchoolManagement.Data.Connections;
 using SchoolManagement.Data.Repository;
 using System.Configuration;
 
@@ -38,7 +39,6 @@ namespace WebAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
             }
 
-            //app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
             app.UseAuthentication();
@@ -60,7 +60,8 @@ namespace WebAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
             });
             services.AddMvc();
-            services.AddDbContext<SchoolManagementContext>(option => option.UseSqlServer(Configuration.GetConnectionString("SMDB")));
+            services.AddDbContext<SchoolManagementContext>(option =>
+                option.UseSqlServer(ConnectionManager.GetConnectionString()));
 
             services.AddScoped<ISchoolBusiness, SchoolBusiness>();
             services.AddScoped<IStudentBusiness, StudentBusiness>();
@@ -73,20 +74,6 @@ namespace WebAPI
             services.AddScoped<IJobAllStudentsRetriever, JobAllStudentsRetriever>();
 
             services.AddHangfire(config => { config.UseMemoryStorage(); });
-            //services.AddHangfire(config =>
-
-            //    config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
-            //    .UseSimpleAssemblyNameTypeSerializer()
-            //    .UseRecommendedSerializerSettings()
-            //    .UseSqlServerStorage(Configuration.GetConnectionString("HangfireConnection"),
-            //    new SqlServerStorageOptions
-            //    {
-            //        CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
-            //        SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-            //        QueuePollInterval = TimeSpan.Zero,
-            //        UseRecommendedIsolationLevel = true,
-            //        DisableGlobalLocks = true
-            //    }));
             services.AddHangfireServer();
         }
 
@@ -104,12 +91,6 @@ namespace WebAPI
                     Job.FromExpression<IJobAllStudentsRetriever>(x => x.AllStudentsRetrieve()),
                     Configuration.GetValue<string>("AllStudentsRetriever")
                     );
-
-                //bu app.config'tan cekiyor
-                //recurringJobManager.AddOrUpdate(
-                //    "AllStudentsRetriever",
-                //    Job.FromExpression<IJobAllStudentsRetriever>(x => x.AllStudentsRetrieve()),
-                //    ConfigurationManager.AppSettings["AllStudentsRetriever"]);
             }
             else
             {

@@ -5,8 +5,6 @@ namespace SchoolManagement.Data
 {
     public class SchoolManagementContext : DbContext
     {
-        //private string connectionString = @"Server=DESKTOP-6E0MHSD\APO; Database= SchoolManagement; Trusted_Connection=True;";
-
         public SchoolManagementContext(DbContextOptions<SchoolManagementContext> options) : base(options)
         {
         }

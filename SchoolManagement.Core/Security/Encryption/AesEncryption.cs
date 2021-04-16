@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SchoolManagement.Libraries.Core.Security.Encryption
 {
-    public class AesEncryption
+    public static class AesEncryption
     {
         public static string Decrypt(string encryptedText, string key)
         {
@@ -51,9 +51,6 @@ namespace SchoolManagement.Libraries.Core.Security.Encryption
             {
                 hexString += bytes[i].ToString("X2");
             }
-
-            //var str = Encoding.Default.GetString(bytes);
-
             return hexString;
         }
 

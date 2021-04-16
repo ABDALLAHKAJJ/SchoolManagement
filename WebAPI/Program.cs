@@ -8,19 +8,13 @@ using System.Configuration;
 namespace WebAPI
 
 {
-    public class Program
+    public static class Program
     {
-        private static string URL = ConfigurationManager.AppSettings["URL"];
+        private static readonly string Url = ConfigurationManager.AppSettings["URL"];
 
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-
-            //var host = new WebHostBuilder()
-            //    .UseKestrel()
-            //    .UseStartup<Startup>()
-            //    .Build();
-            //host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -33,7 +27,7 @@ namespace WebAPI
                         o.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(20);
                         o.Limits.RequestHeadersTimeout = TimeSpan.FromMinutes(2);
                     });
-                    webBuilder.UseUrls(URL);
+                    webBuilder.UseUrls(Url);
                 }).UseWindowsService().ConfigureLogging(logging =>
                 {
                     logging.ClearProviders();

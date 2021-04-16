@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using SchoolManagement.Business.Abstracts;
 using SchoolManagement.Data.Entities;
 using SchoolManagement.Libraries.Core.Abstracts;

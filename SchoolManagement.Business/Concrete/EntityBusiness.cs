@@ -1,5 +1,4 @@
-﻿using System;
-using SchoolManagement.Business.Abstracts;
+﻿using SchoolManagement.Business.Abstracts;
 using SchoolManagement.Data.Abstracts;
 using SchoolManagement.Libraries.Core.Abstracts;
 using SchoolManagement.Libraries.Core.Results;

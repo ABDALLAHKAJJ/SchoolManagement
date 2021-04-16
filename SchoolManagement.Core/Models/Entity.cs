@@ -1,4 +1,4 @@
-﻿using SchoolManagement.Libraries.Core.Absrtacts;
+﻿using SchoolManagement.Libraries.Core.Abstracts;
 
 namespace SchoolManagement.Libraries.Core.Models
 {

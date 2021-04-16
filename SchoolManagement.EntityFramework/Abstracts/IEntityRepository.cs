@@ -1,5 +1,5 @@
-﻿using SchoolManagement.Libraries.Core.Absrtacts;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using SchoolManagement.Libraries.Core.Abstracts;
 
 namespace SchoolManagement.Data.Abstracts
 {

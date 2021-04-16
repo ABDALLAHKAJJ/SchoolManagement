@@ -16,7 +16,7 @@ namespace SchoolManagement.Automation.HangFire.JobConcrete
 
         public List<Student> AllStudentsRetrieve()
         {
-            return _studentBusiness.GetAll();
+            return _studentBusiness.GetAll().Data;
         }
     }
 }

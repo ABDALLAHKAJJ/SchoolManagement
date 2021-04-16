@@ -1,4 +1,4 @@
-﻿namespace SchoolManagement.Libraries.Core.Absrtacts
+﻿namespace SchoolManagement.Libraries.Core.Abstracts
 {
     public interface IEntity
     {

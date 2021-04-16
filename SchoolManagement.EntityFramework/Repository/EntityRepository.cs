@@ -1,5 +1,5 @@
 ﻿using SchoolManagement.Data.Abstracts;
-using SchoolManagement.Libraries.Core.Absrtacts;
+using SchoolManagement.Libraries.Core.Abstracts;
 using System.Collections.Generic;
 using System.Linq;
 

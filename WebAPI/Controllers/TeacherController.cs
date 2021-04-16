@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SchoolManagement.Business.Abstracts;
 using SchoolManagement.Data.Entities;
+using SchoolManagement.Libraries.Core.Abstracts;
 
 namespace WebAPI.Controllers
 {
@@ -8,11 +10,8 @@ namespace WebAPI.Controllers
     [ApiController]
     public class TeacherController : EntityController<Teacher>
     {
-        private readonly ITeacherBusiness _teacherBusiness;
-
-        public TeacherController(ITeacherBusiness teacherBusiness) : base(teacherBusiness)
+        public TeacherController(ITeacherBusiness teacherBusiness, ILoggingManager logger) : base(teacherBusiness, logger)
         {
-            _teacherBusiness = teacherBusiness;
         }
     }
 }

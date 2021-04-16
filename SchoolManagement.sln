@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.Data", "Sc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.Automation", "SchoolManagement.Automation\SchoolManagement.Automation.csproj", "{378825B6-EDA0-46FB-A133-D868A151DE39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleUI", "ConsoleUI\ConsoleUI.csproj", "{9DA228D9-D2C9-40F6-9683-6AA0BB08942B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUI", "ConsoleUI\ConsoleUI.csproj", "{9DA228D9-D2C9-40F6-9683-6AA0BB08942B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

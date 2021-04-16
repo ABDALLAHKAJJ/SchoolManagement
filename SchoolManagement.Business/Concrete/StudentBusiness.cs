@@ -6,11 +6,8 @@ namespace SchoolManagement.Business.Concrete
 {
     public class StudentBusiness : EntityBusiness<Student>, IStudentBusiness
     {
-        private readonly IStudentRepository _sr;
-
         public StudentBusiness(IStudentRepository sr) : base(sr)
         {
-            _sr = sr;
         }
     }
 }

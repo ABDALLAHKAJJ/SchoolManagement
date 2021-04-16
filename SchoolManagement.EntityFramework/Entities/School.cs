@@ -1,4 +1,4 @@
-﻿using SchoolManagement.Libraries.Core.Absrtacts;
+﻿using SchoolManagement.Libraries.Core.Abstracts;
 using SchoolManagement.Libraries.Core.Models;
 using System.ComponentModel.DataAnnotations;
 

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using NLog;
 using SchoolManagement.Automation.HangFire.JobAbstracts;
 using SchoolManagement.Automation.HangFire.JobConcrete;
 using SchoolManagement.Business.Abstracts;
@@ -16,7 +17,10 @@ using SchoolManagement.Data;
 using SchoolManagement.Data.Abstracts;
 using SchoolManagement.Data.Connections;
 using SchoolManagement.Data.Repository;
+using SchoolManagement.Libraries.Core.Extension;
+using System;
 using System.Configuration;
+using System.IO;
 
 namespace WebAPI
 {
@@ -24,6 +28,8 @@ namespace WebAPI
     {
         public Startup(IConfiguration configuration)
         {
+            LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
+
             Configuration = configuration;
         }
 
@@ -32,13 +38,17 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IRecurringJobManager recurringJobManager)
         {
-            if (env.IsDevelopment() || env.IsProduction())
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
             }
-
+            if (env.IsProduction())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI v1"));
+            }
             app.UseRouting();
             app.UseAuthorization();
             app.UseAuthentication();
@@ -54,6 +64,7 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureLoggerService();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

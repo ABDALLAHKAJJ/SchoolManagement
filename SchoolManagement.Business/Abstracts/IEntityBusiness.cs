@@ -1,18 +1,18 @@
-﻿using SchoolManagement.Libraries.Core.Absrtacts;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using SchoolManagement.Libraries.Core.Abstracts;
 
 namespace SchoolManagement.Business.Abstracts
 {
     public interface IEntityBusiness<TEntity> where TEntity : class, IEntity, new()
     {
-        TEntity Get(int id);
+        IDataResult<TEntity> Get(int id);
 
-        List<TEntity> GetAll();
+        IDataResult<List<TEntity>> GetAll();
 
-        void Add(TEntity entity);
+        IResult Add(TEntity entity);
 
-        void Update(TEntity entity);
+        IResult Update(TEntity entity);
 
-        void Delete(TEntity entity);
+        IResult Delete(TEntity entity);
     }
 }

@@ -1,6 +1,8 @@
-﻿using SchoolManagement.Business.Abstracts;
+﻿using System;
+using SchoolManagement.Business.Abstracts;
 using SchoolManagement.Data.Abstracts;
-using SchoolManagement.Libraries.Core.Absrtacts;
+using SchoolManagement.Libraries.Core.Abstracts;
+using SchoolManagement.Libraries.Core.Results;
 using System.Collections.Generic;
 
 namespace SchoolManagement.Business.Concrete
@@ -15,35 +17,69 @@ namespace SchoolManagement.Business.Concrete
             _entityRepository = entityRepository;
         }
 
-        public void Add(TEntity entity)
+        public IResult Add(TEntity entity)
         {
             if (entity != null)
             {
                 _entityRepository.Add(entity);
+                return new SuccessResult("Success");
+            }
+            else
+            {
+                return new ErrorResult("Error");
             }
         }
 
-        public void Delete(TEntity entity)
+        public IResult Delete(TEntity entity)
         {
             if (entity != null)
             {
                 _entityRepository.Delete(entity);
+                return new SuccessResult("Success");
+            }
+            else
+            {
+                return new ErrorResult("Error");
             }
         }
 
-        public TEntity Get(int id)
+        public IDataResult<TEntity> Get(int id)
         {
-            return _entityRepository.Get(id);
+            var result = _entityRepository.Get(id);
+            if (result != null)
+            {
+                return new SuccessDataResult<TEntity>(result, "success");
+            }
+            else
+            {
+                return new ErrorDataResult<TEntity>("Error");
+            }
         }
 
-        public List<TEntity> GetAll()
+        public IDataResult<List<TEntity>> GetAll()
         {
-            return _entityRepository.GetAll();
+            var result = _entityRepository.GetAll();
+            if (result != null)
+            {
+                return new SuccessDataResult<List<TEntity>>(result, "success");
+            }
+            else
+            {
+                return new ErrorDataResult<List<TEntity>>("Error");
+            }
         }
 
-        public void Update(TEntity entity)
+        public IResult Update(TEntity entity)
         {
-            _entityRepository.Update(entity);
+            if (entity != null)
+            {
+                _entityRepository.Update(entity);
+                return new SuccessResult("Success");
+            }
+            else
+            {
+                return new ErrorResult("Error");
+            }
         }
     }
 }

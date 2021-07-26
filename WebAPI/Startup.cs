@@ -27,7 +27,6 @@ namespace WebAPI
 {
     public class Startup
     {
-        //adel
         public Startup(IConfiguration configuration)
         {
             LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
